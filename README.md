@@ -622,3 +622,15 @@ Video demo in Chinese: [fcitx5-vinput](https://www.bilibili.com/video/BV1a6cUzVE
 [qnn-doc]: https://k2-fsa.github.io/sherpa/onnx/qnn/index.html
 [ascend-doc]: https://k2-fsa.github.io/sherpa/onnx/ascend/index.html
 [axera-npu]: https://axera-tech.com/Skill/166.html
+
+# KeVoiceInput 定制版 sherpa-onnx
+
+这是为 KeVoiceInput 项目定制的 sherpa-onnx 版本，增加了 SeACo Paraformer 的 model_eb 支持。
+
+## 自定义功能
+
+- 添加对 model_eb.onnx 的支持 (用于 SeACo Paraformer 热词功能)
+- 修改了 C/C++/Python APIs 以兼容 model_eb 参数
+- 专为 KeVoiceInput 项目优化的构建配置
+
+---
