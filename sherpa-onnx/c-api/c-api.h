@@ -831,6 +831,10 @@ typedef struct SherpaOnnxOfflineTransducerModelConfig {
 typedef struct SherpaOnnxOfflineParaformerModelConfig {
   /** Path to the ONNX model. */
   const char *model;
+  /** Path to the embedding model for SeACo-Paraformer (hotwords support).
+   * If non-null, the recognizer will use SeACo-Paraformer mode.
+   */
+  const char *model_eb;
 } SherpaOnnxOfflineParaformerModelConfig;
 
 /** @brief Configuration for a non-streaming NeMo CTC model. */

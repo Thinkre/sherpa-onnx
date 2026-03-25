@@ -40,13 +40,14 @@ class OfflineParaformerModel {
   std::vector<Ort::Value> Forward(Ort::Value features,
                                   Ort::Value features_length);
 
-  /** Run the forward method with bias embedding for SeACo-Paraformer.
+  /** Run the forward method with bias_embed for SeACo-Paraformer hotwords.
    *
    * @param features  A tensor of shape (N, T, C). It is changed in-place.
-   * @param features_length  A 1-D tensor of shape (N,).
-   * @param bias_embed  Bias embedding tensor for hotwords.
+   * @param features_length  A 1-D tensor of shape (N,) containing number of
+   *                         valid frames in `features` before padding.
+   * @param bias_embed  A tensor containing bias embeddings from hotwords.
    *
-   * @return Return a vector containing log_probs and token_num.
+   * @return Return a vector containing model outputs.
    */
   std::vector<Ort::Value> Forward(Ort::Value features,
                                   Ort::Value features_length,
@@ -76,13 +77,16 @@ class OfflineParaformerModel {
    */
   OrtAllocator *Allocator() const;
 
-  /** Forward embedding model for SeACo-Paraformer hotwords
-   * @param input_ids Input token IDs for hotwords
-   * @return Embedding values
+  /** Run the embedding model for hotwords (SeACo-Paraformer).
+   *
+   * @param input_ids  A tensor of token IDs for hotwords.
+   * @return Return embedding outputs.
    */
   std::vector<Ort::Value> ForwardEmbedding(Ort::Value input_ids) const;
 
-  /** Check if embedding model is available (for SeACo-Paraformer)
+  /** Check if embedding model is loaded (SeACo-Paraformer).
+   *
+   * @return true if embedding model (model_eb) is loaded.
    */
   bool HasEmbeddingModel() const;
 
