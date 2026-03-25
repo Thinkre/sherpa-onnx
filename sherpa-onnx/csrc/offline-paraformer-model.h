@@ -40,6 +40,18 @@ class OfflineParaformerModel {
   std::vector<Ort::Value> Forward(Ort::Value features,
                                   Ort::Value features_length);
 
+  /** Run the forward method with bias embedding for SeACo-Paraformer.
+   *
+   * @param features  A tensor of shape (N, T, C). It is changed in-place.
+   * @param features_length  A 1-D tensor of shape (N,).
+   * @param bias_embed  Bias embedding tensor for hotwords.
+   *
+   * @return Return a vector containing log_probs and token_num.
+   */
+  std::vector<Ort::Value> Forward(Ort::Value features,
+                                  Ort::Value features_length,
+                                  Ort::Value bias_embed);
+
   /** Return the vocabulary size of the model
    */
   int32_t VocabSize() const;
@@ -63,6 +75,16 @@ class OfflineParaformerModel {
   /** Return an allocator for allocating memory
    */
   OrtAllocator *Allocator() const;
+
+  /** Forward embedding model for SeACo-Paraformer hotwords
+   * @param input_ids Input token IDs for hotwords
+   * @return Embedding values
+   */
+  std::vector<Ort::Value> ForwardEmbedding(Ort::Value input_ids) const;
+
+  /** Check if embedding model is available (for SeACo-Paraformer)
+   */
+  bool HasEmbeddingModel() const;
 
  private:
   class Impl;
