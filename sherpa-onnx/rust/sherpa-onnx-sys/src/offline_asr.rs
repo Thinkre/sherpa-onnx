@@ -16,6 +16,9 @@ pub struct OfflineTransducerModelConfig {
 #[derive(Debug, Copy, Clone)]
 pub struct OfflineParaformerModelConfig {
     pub model: *const c_char,
+    /// Path to the embedding model for SeACo-Paraformer (hotwords support).
+    /// Set to null if not using SeACo mode.
+    pub model_eb: *const c_char,
 }
 
 #[repr(C)]

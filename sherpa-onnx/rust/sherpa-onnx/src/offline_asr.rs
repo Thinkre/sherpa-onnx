@@ -66,12 +66,16 @@ impl OfflineTransducerModelConfig {
 /// Offline Paraformer model configuration.
 pub struct OfflineParaformerModelConfig {
     pub model: Option<String>,
+    /// Path to the embedding model for SeACo-Paraformer (hotwords support).
+    /// Leave as `None` for standard Paraformer.
+    pub model_eb: Option<String>,
 }
 
 impl OfflineParaformerModelConfig {
     fn to_sys(&self, cstrings: &mut Vec<CString>) -> sys::OfflineParaformerModelConfig {
         sys::OfflineParaformerModelConfig {
             model: to_c_ptr(&self.model, cstrings),
+            model_eb: to_c_ptr(&self.model_eb, cstrings),
         }
     }
 }
