@@ -66,16 +66,14 @@ impl OfflineTransducerModelConfig {
 /// Offline Paraformer model configuration.
 pub struct OfflineParaformerModelConfig {
     pub model: Option<String>,
-    /// Path to the embedding model for SeACo-Paraformer (hotwords support).
-    /// Leave as `None` for standard Paraformer.
-    pub model_eb: Option<String>,
+    // model_eb (SeACo-Paraformer embedding model) is not exposed in the
+    // pre-built v1.12.33 C ABI. Build sherpa-onnx from source to use it.
 }
 
 impl OfflineParaformerModelConfig {
     fn to_sys(&self, cstrings: &mut Vec<CString>) -> sys::OfflineParaformerModelConfig {
         sys::OfflineParaformerModelConfig {
             model: to_c_ptr(&self.model, cstrings),
-            model_eb: to_c_ptr(&self.model_eb, cstrings),
         }
     }
 }
