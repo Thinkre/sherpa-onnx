@@ -20,9 +20,8 @@ const SHERPA_ONNX_STATIC_LIBS: &[&str] = &[
     "sherpa-onnx-fst",
     "kaldi-native-fbank-core",
     "kissfft-float",
-    "piper_phonemize",
-    "espeak-ng",
-    "ucd",
+    // piper_phonemize, espeak-ng, ucd are TTS-only libs; omitted because we
+    // build with -DSHERPA_ONNX_ENABLE_TTS=OFF and they are not produced.
     "onnxruntime",
     "ssentencepiece_core",
 ];
