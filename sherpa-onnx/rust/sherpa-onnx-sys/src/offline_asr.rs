@@ -16,10 +16,10 @@ pub struct OfflineTransducerModelConfig {
 #[derive(Debug, Copy, Clone)]
 pub struct OfflineParaformerModelConfig {
     pub model: *const c_char,
-    // NOTE: model_eb is NOT exposed in the pre-built v1.12.33 C ABI.
-    // Adding it here would shift all subsequent fields and cause crashes.
-    // To use SeACo-Paraformer with hotwords, sherpa-onnx must be compiled
-    // from source with the model_eb patch applied.
+    /// Path to the embedding model for SeACo-Paraformer (hotwords support).
+    /// Set to null if not using SeACo mode.
+    /// NOTE: requires sherpa-onnx built from source (vendor/sherpa-onnx).
+    pub model_eb: *const c_char,
 }
 
 #[repr(C)]
